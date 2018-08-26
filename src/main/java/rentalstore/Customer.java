@@ -52,4 +52,8 @@ public class Customer {
         }
         return frequentRenterPoints;
     }
+
+    public String htmlStatement() {
+        return null;
+    }
 }
