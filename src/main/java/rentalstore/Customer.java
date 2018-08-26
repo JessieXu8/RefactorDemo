@@ -21,20 +21,30 @@ public class Customer {
 
     public String statement() {
         Enumeration rentals = this.rentals.elements();
-        String result = "Rental Record for " + getName() + "\n";
+        String result = getHeaderString();
         while (rentals.hasMoreElements()) {
 
             Rental each = (Rental) rentals.nextElement();
 
-            //show figures for this rental
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getAmount()) + "\n";
+            result += getEachString(each);
         }
 
-        //add footer lines
-        result += "Amount owed is " + String.valueOf(getTotalAmount()) + "\n";
-        result += "You earned " + String.valueOf(getFrequentRenterPoints()) + " frequent renter points";
+        result += getFooterString();
         return result;
     }
+
+    private String getFooterString() {
+        return "Amount owed is " + String.valueOf(getTotalAmount()) + "\n"+"You earned " + String.valueOf(getFrequentRenterPoints()) + " frequent renter points";
+    }
+
+    private String getEachString(Rental each) {
+        return "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getAmount()) + "\n";
+    }
+
+    private String getHeaderString() {
+        return "Rental Record for " + getName() + "\n";
+    }
+
     double getTotalAmount(){
         double totalAmount = 0;
         Enumeration rentals = this.rentals.elements();
