@@ -32,6 +32,20 @@ public class Customer {
         return txtStatement.getTxtStatement(this);
     }
 
+    public String htmlStatement() {
+        Enumeration rentals = this.rentals.elements();
+        String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+            result += each.getMovie().getTitle() + ": " + String.valueOf(each.getAmount()) + "<BR>\n";
+        }
+        //add footer lines
+        result += "<P>You owe<EM>" + String.valueOf(getTotalAmount()) + "</EM><P>\n";
+        result += "On this rental you earned <EM>" + String.valueOf(getFrequentRenterPoints()) +
+                "</EM> frequent renter points<P>";
+        return result;
+    }
+
     double getTotalAmount() {
         double totalAmount = 0;
         Enumeration rentals = this.rentals.elements();
@@ -53,7 +67,4 @@ public class Customer {
         return frequentRenterPoints;
     }
 
-    public String htmlStatement() {
-        return null;
-    }
 }
